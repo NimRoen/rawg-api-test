@@ -1,0 +1,23 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.jsx",
+  "scripts": {
+    "dev": "next"
+  },
+  "keywords": [],
+  "author": "Roman Churkin",
+  "license": "ISC",
+  "dependencies": {
+    "next": "^10.1.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-slider": "^1.1.4",
+    "styled-components": "^5.2.3"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-styled-components": "^1.12.0"
+  }
+}
