@@ -44,8 +44,11 @@ class Document extends NextDocument {
                 }
 
                 html {
-                  font-family: 'Roboto', sans-serif;
                   font-size: 10px;
+                }
+
+                html, body, div#__next {
+                  height: 100%;
                 }
               `
             }}

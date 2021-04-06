@@ -19,7 +19,9 @@
           "client": "./client",
           "components": "./client/components",
           "pages": "./pages",
-          "styles": "./client/styles"
+          "styles": "./client/styles",
+          "layouts": "./client/components/layouts",
+          "helpers": "./client/helpers"
         }
       }
     ]

@@ -1,4 +1,4 @@
-import GamePage from 'components/GamePage';
+import GamePage from 'components/pages/GamePage';
 
 const Game = () => <GamePage />
 

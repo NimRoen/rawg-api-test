@@ -1,11 +1,5 @@
-import React from 'react';
+import MainPage from 'components/pages/MainPage';
 
-const IndexPage = () => {
-  return (
-    <>
-      Index Page
-    </>
-  );
-};
+const Index = () => <MainPage />
 
-export default IndexPage;
+export default Index;
