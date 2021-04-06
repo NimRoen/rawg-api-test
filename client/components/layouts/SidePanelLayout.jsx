@@ -17,10 +17,21 @@ const Menu = styled.ul`
 
 const Option = styled.li`
   position: relative;
+  display: flex;
+  align-items: center;
+  height: 50px;
 
   & a {
+    position: absolute;
+    display: flex;
+    align-items: center;
     width: 100%;
     height: 100%;
+    padding: 0 30px;
+  }
+
+  &.selected {
+    padding: 0 30px;
   }
 `;
 

@@ -38,6 +38,11 @@ const DigitalPineTest = ({ Component, pageProps }) => {
                 font-family: ${theme[mode].defaultTitle};
               }
 
+              li {
+                transition: background-color ease ${theme[mode].defaultTransition},
+                            color ease ${theme[mode].defaultTransition};
+              }
+
               li a {
                 color: ${theme[mode].defaultColor};
               }
@@ -52,10 +57,6 @@ const DigitalPineTest = ({ Component, pageProps }) => {
 
               li.selected {
                 color: ${theme[mode].actionColor};
-              }
-
-              li.selected:hover {
-                background-color: unset;
               }
             `
           }}
