@@ -16,6 +16,7 @@
       {
         "root": ["./"],
         "alias": {
+          "root": "./",
           "client": "./client",
           "components": "./client/components",
           "pages": "./pages",
@@ -24,6 +25,7 @@
           "helpers": "./client/helpers"
         }
       }
-    ]
+    ],
+    ["inline-react-svg"]
   ]
 }
