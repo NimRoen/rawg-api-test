@@ -6,12 +6,6 @@ const Container = styled.main`
   padding: 30px 0 30px 30px;
 `;
 
-const ContentLayout = ({ children }) => {
-  return (
-    <Container>
-      {children}
-    </Container>
-  );
-};
+const ContentLayout = ({ children }) => <Container>{children}</Container>;
 
 export default ContentLayout;

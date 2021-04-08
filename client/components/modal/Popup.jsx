@@ -16,6 +16,7 @@ const Container = styled.div`
 const Popup = ({
   id,
   content,
+  hide,
   children,
 }) => {
   const [visible, setVisible] = useState(false);
@@ -27,7 +28,10 @@ const Popup = ({
   const handler = useRef(null);
   const ref = useRef(null);
 
-  useClickOutside(ref, () => setVisible(false));
+  useClickOutside(ref, () => {
+    setVisible(false);
+    hide();
+  });
 
   const onClick = e => {
     e.preventDefault();
@@ -74,4 +78,5 @@ export default Popup;
 
 Popup.propTypes = {
   id: PropTypes.string.isRequired,
+  hide: PropTypes.func,
 };

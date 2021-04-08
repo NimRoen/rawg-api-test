@@ -58,6 +58,24 @@ const DigitalPineTest = ({ Component, pageProps }) => {
               li.selected {
                 color: ${theme[mode].actionColor};
               }
+
+              button {
+                background-color: ${theme[mode].actionForeground};
+                border: 2px solid ${theme[mode].defaultBorder};
+                transition: background-color ease ${theme[mode].defaultTransition};
+              }
+
+              button:hover {
+                background-color: ${theme[mode].highlightBackground};
+              }
+
+              button:hover svg {
+                fill: ${theme[mode].defaultColor};
+              }
+
+              button:focus {
+                box-shadow: 0 0 0 2px ${theme[mode].actionBackground};
+              }
             `
           }}
         />

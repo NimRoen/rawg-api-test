@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { scrollbar } from 'helpers/style';
+
 import ThemeContext from 'client/context/ThemeContext';
 import ChevronIcon from 'client/shared/svg/ChevronIcon.svg';
 
@@ -37,36 +39,57 @@ const CollapsedIndicator = styled.div`
   height: 26px;
 
   & svg {
-    transform: rotateZ(-90deg) rotateY(0deg);
+    transform: rotateZ(-90deg) rotateY(180deg);
     transition: transform ease ${({ mode, theme }) => theme[mode].defaultTransition};
   }
 
   ${Container}.collapsed & svg {
-    transform: rotateZ(-90deg) rotateY(180deg);
+    transform: rotateZ(-90deg) rotateY(0deg);
   }
 `;
 
-const ContentContainer = styled.div`
+const ContentWrapper = styled.div`
   ${({ mode, theme }) => `
-    display: flex;
-    flex-direction: column;
-    max-height: 290px;
+    padding-right: 3px;
     border: 2px solid ${theme[mode].defaultBorder};
     border-radius: 8px;
     font-size: 1.5rem;
+    overflow: hidden;
+  `}
+`;
+
+const ContentContainer = styled.div`
+  ${({ mode }) => `
+    display: flex;
+    flex-direction: column;
+    max-height: 290px;
     overflow-y: auto;
+
+    ${scrollbar(mode)}
   `}
 `;
 
 const ListItem = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 0 10px;
-  min-height: 30px;
+  ${({ mode, theme }) => `
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    min-height: 30px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${theme[mode].highlightBackground};
+    }
+
+    &.selected {
+      color: ${theme[mode].highlightColor};
+      cursor: default;
+    }
+  `}
 `;
 
-const Listbox = ({ elements, selected }) => {
-  const [collapsed, setCollapsed] = useState(false);
+const Listbox = ({ elements, selected, onSelect }) => {
+  const [collapsed, setCollapsed] = useState(true);
   const { mode } = useContext(ThemeContext);
 
   const hasElements = elements.length > 0;
@@ -75,17 +98,28 @@ const Listbox = ({ elements, selected }) => {
   if (!hasElements) return null;
 
   const ContentList = React.memo(({ elements }) => (
-    <ContentContainer mode={mode}>
-      {elements.map(({ id, name }) => (
-        <ListItem key={`listbox-item-${id}`}>{name}</ListItem>
-      ))}
-    </ContentContainer>
+    <ContentWrapper mode={mode}>
+      <ContentContainer mode={mode}>
+        {elements.map(({ id, name }, index) => (
+          <ListItem
+            key={`listbox-item-${id}`}
+            mode={mode}
+            onClick={() => {
+              if (selected !== index)
+                onSelect(id);
+            }}
+            className={selected === index ? 'selected' : ''}
+          >{name}</ListItem>
+        ))}
+      </ContentContainer>
+    </ContentWrapper>
   ));
 
   return (
     <Popup
       id='listbox-popup'
       content={<ContentList elements={elements} />}
+      hide={() => setCollapsed(true)}
     >
       <Container
         mode={mode}
@@ -119,4 +153,5 @@ Listbox.propTypes = {
 
     return null;
   },
+  onSelect: PropTypes.func,
 };
