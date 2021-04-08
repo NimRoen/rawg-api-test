@@ -24,6 +24,10 @@ const DigitalPineTest = ({ Component, pageProps }) => {
         <style
           dangerouslySetInnerHTML={{
             __html: `
+              *:focus {
+                box-shadow: 0 0 0 2px ${theme[mode].actionBackground};
+              }
+
               html {
                 font-family: ${theme[mode].defaultText};
               }
@@ -73,8 +77,14 @@ const DigitalPineTest = ({ Component, pageProps }) => {
                 fill: ${theme[mode].defaultColor};
               }
 
-              button:focus {
-                box-shadow: 0 0 0 2px ${theme[mode].actionBackground};
+              input[type='text'] {
+                color: ${theme[mode].defaultColor};
+                background-color: ${theme[mode].defaultBackground};
+                border: 2px solid ${theme[mode].defaultBorder};
+              }
+
+              input[type='text']::placeholder {
+                color: ${theme[mode].disabledBackground};
               }
             `
           }}

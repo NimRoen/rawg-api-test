@@ -1,6 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import throttle from 'lodash/throttle';
+
+import { SORTED_TYPE, SORTING } from 'helpers/constants';
 
 import ThemeContext from 'client/context/ThemeContext';
 import Star from 'client/shared/svg/StarIcon.svg';
@@ -8,7 +11,7 @@ import Calendar from 'client/shared/svg/CalendarIcon.svg';
 
 import Listbox from 'components/UI/Listbox';
 import StyledButton from 'components/UI/Button';
-import { SORTED_TYPE, SORTING } from '../../helpers/constants';
+import Textfield from 'components/UI/Textfield';
 
 const Container = styled.div`
   display: flex;
@@ -94,12 +97,25 @@ const CalendarIcon = styled(Calendar)`
   margin-bottom: 2px;
 `;
 
+const SearchContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+`;
+
+const SearchField = styled(Textfield)`
+  width: 300px;
+  padding-left: 6px;
+  padding-right: 36px;
+`;
+
 const SearchPanelLayout = ({
   platforms,
   platform,
   changePlatform,
   sorted,
   onSorting,
+  onSearch,
 }) => {
   const { mode } = useContext(ThemeContext);
   const selected = platforms.reduce((acc, { id }, index) => id === platform ? index : acc, 0);
@@ -135,6 +151,12 @@ const SearchPanelLayout = ({
           className={sorted[SORTING.RELEASED]}
         />
       </SortersContainer>
+      <SearchContainer>
+        <SearchField
+          placeholder='Поиск...'
+          onChange={throttle(e => onSearch(e.target.value), 200)}
+        />
+      </SearchContainer>
     </Container>
   );
 };
@@ -147,4 +169,5 @@ SearchPanelLayout.propTypes = {
   changePlatform: PropTypes.func,
   sorted: PropTypes.object.isRequired,
   onSorting: PropTypes.func,
+  onSearch: PropTypes.func,
 };

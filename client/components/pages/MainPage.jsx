@@ -13,6 +13,7 @@ const MainPage = () => {
   const [platform, changePlatform] = useState(0);
   const [ratingSorted, setRatingSorted] = useState(SORTED_TYPE.DESCENDING);
   const [releaseSorted, setReleaseSorted] = useState(SORTED_TYPE.NONE);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     fetch(`${API_PLATFORMS}?key=${tokens.rawgToken}`)
@@ -34,6 +35,10 @@ const MainPage = () => {
     }
   };
 
+  const onSearch = value => {
+    setSearchValue(value);
+  };
+
   return (
     <Page title='Каталог игр'>
       <SearchPanelLayout {...{
@@ -45,6 +50,7 @@ const MainPage = () => {
           [SORTING.RELEASED]: releaseSorted,
         },
         onSorting,
+        onSearch,
       }} />
     </Page>
   );
