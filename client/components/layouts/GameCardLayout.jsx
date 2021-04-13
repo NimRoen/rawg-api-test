@@ -1,6 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+
+import { routes } from 'helpers/routes';
 
 const Container = styled.div`
   ${({ theme }) => `
@@ -55,31 +58,37 @@ const ReleasedDateContainer = styled.div``;
 const RatingContainer = styled.div``;
 
 const GameCardLayout = ({ game }) => {
-  const { name, background_image, released, rating } = game;
+  const { name, background_image, released, rating, slug } = game;
+  const { path } = routes.game;
 
   const releasedDate = released ? new Date(released).toLocaleDateString() : '';
 
   return (
-    <Container>
-      <PosterContainer>
-        {background_image && <Poster src={background_image} alt={name} />}
-      </PosterContainer>
-      <InfoContainer>
-        <TitleContainer>
-          <Title>{name}</Title>
-        </TitleContainer>
+    <Link href={{
+      pathname: path,
+      query: { slug },
+    }}>
+      <Container>
+        <PosterContainer>
+          {background_image && <Poster src={background_image} alt={name} />}
+        </PosterContainer>
+        <InfoContainer>
+          <TitleContainer>
+            <Title>{name}</Title>
+          </TitleContainer>
 
-        <AdditionalInfoContainer>
-          <ReleasedDateContainer>
-            {releasedDate}
-          </ReleasedDateContainer>
+          <AdditionalInfoContainer>
+            <ReleasedDateContainer>
+              {releasedDate}
+            </ReleasedDateContainer>
 
-          <RatingContainer>
-            {`★ ${rating}`}
-          </RatingContainer>
-        </AdditionalInfoContainer>
-      </InfoContainer>
-    </Container>
+            <RatingContainer>
+              {`★ ${rating}`}
+            </RatingContainer>
+          </AdditionalInfoContainer>
+        </InfoContainer>
+      </Container>
+    </Link>
   );
 };
 
