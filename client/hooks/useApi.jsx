@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import { API_PLATFORMS, API_GAMES, SORTED_TYPE, BATCH_GAMES_COUNT } from 'helpers/constants';
 
 import tokens from 'root/tokens.json';
@@ -7,9 +5,10 @@ import tokens from 'root/tokens.json';
 export const useApi = () => {
   const fetchResult = async (query) => {
     const response = await fetch(query)
+      .then(response => response.ok ? response : null)
       .catch(error => new Error(`API fetch query error! ${error}`));
 
-    return response.json() || {};
+    return response ? response.json() : {};
   };
 
   const fetchPlatforms = async () => {
@@ -17,7 +16,7 @@ export const useApi = () => {
 
     return [
       { id: 0, name: 'Все' },
-      ...platforms.results.map(({ id, name }) => ({ id, name })),
+      ...platforms.results?.map(({ id, name }) => ({ id, name })),
     ];
   };
 
@@ -41,7 +40,12 @@ export const useApi = () => {
     if (page > 1)
       query.push(`&page=${page}`);
 
-    return await fetchResult(query.join(''));
+    const games = await fetchResult(query.join(''));
+
+    return {
+      ...games,
+      results: Array.isArray(games?.results) ? games?.results : [],
+    };
   };
 
   return {

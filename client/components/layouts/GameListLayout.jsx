@@ -41,6 +41,8 @@ const GameListLayout = ({ games, anchor }) => {
   const { mode } = useContext(ThemeContext);
   const { prev, next } = games;
 
+  const hasGames = prev.length > 0 || next.length > 0;
+
   useEffect(() => {
     document.body.ref
   }, []);
@@ -50,7 +52,7 @@ const GameListLayout = ({ games, anchor }) => {
       <Container mode={mode}>
         {prev.map(game => <GameCardLayout key={`game-card-${game.id}`} game={game} />)}
       </Container>
-      <Anchor anchor={anchor} />
+      {hasGames && <Anchor anchor={anchor} />}
       <Container mode={mode}>
         {next.map(game => <GameCardLayout key={`game-card-${game.id}`} game={game} />)}
       </Container>

@@ -33,6 +33,8 @@ export const usePagination = ({
     if (!next) return;
 
     const items = await fetchItems(next);
+    
+    if (!items.results.length) return;
 
     setPages({
       prev: prev + 1,
