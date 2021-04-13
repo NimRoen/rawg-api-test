@@ -1,21 +1,19 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { scrollbar } from 'helpers/style';
 
-import ThemeContext from 'client/context/ThemeContext';
-
 import GameCardLayout from './GameCardLayout';
 
 const Container = styled.div`
-  ${({ mode }) => `
+  ${({ theme }) => `
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 30px;
     padding: 15px 0;
     flex-grow: 1;
 
-    ${scrollbar(mode)}
+    ${scrollbar(theme)}
   `}
 `;
 
@@ -34,14 +32,12 @@ const Anchor = styled(({ anchor, children, ...props }) => (
     width: 100%;
     height: 302px;
     margin: 0 auto;
+    z-index: -1;
   }
 `;
 
 const GameListLayout = ({ games, anchor }) => {
-  const { mode } = useContext(ThemeContext);
   const { prev, next } = games;
-
-  const hasGames = prev.length > 0 || next.length > 0;
 
   useEffect(() => {
     document.body.ref
@@ -49,11 +45,11 @@ const GameListLayout = ({ games, anchor }) => {
 
   return (
     <>
-      <Container mode={mode}>
+      <Container>
         {prev.map(game => <GameCardLayout key={`game-card-${game.id}`} game={game} />)}
       </Container>
-      {hasGames && <Anchor anchor={anchor} />}
-      <Container mode={mode}>
+      <Anchor anchor={anchor} />
+      <Container>
         {next.map(game => <GameCardLayout key={`game-card-${game.id}`} game={game} />)}
       </Container>
     </>

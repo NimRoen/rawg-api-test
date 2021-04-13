@@ -90,7 +90,7 @@ const DigitalPineTest = ({ Component, pageProps }) => {
           }}
         />
       </Head>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme[mode]}>
         <ThemeContext.Provider value={value}>
           <Component {...pageProps} />
         </ThemeContext.Provider>

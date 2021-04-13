@@ -1,14 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ThemeContext from 'client/context/ThemeContext';
-
-const Button = styled(({ value, icon, onClick, ...props }) => {
-  const { mode } = useContext(ThemeContext);
-
+const Button = styled(({ value, icon, ...props }) => {
   return (
-    <button {...{ mode, onClick }} {...props}>
+    <button {...props}>
       {icon}
       {value}
     </button>

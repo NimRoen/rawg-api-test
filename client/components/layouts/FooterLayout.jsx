@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { CONTENT_WIDTH_MAX } from 'helpers/style';
-
-import ThemeContext from 'client/context/ThemeContext';
 
 const Container = styled.footer`
   width: 100%;
@@ -17,16 +15,14 @@ const Wrapper = styled.div`
   height: 100%;
   margin: auto;
   padding: 0 15px;
-  color: ${({ mode, theme }) => theme[mode].disabledColor};
+  color: ${({ theme }) => theme.disabledColor};
   font-size: 1.3rem;
 `;
 
 const FooterLayout = () => {
-  const { mode } = useContext(ThemeContext);
-
   return (
     <Container>
-      <Wrapper mode={mode}>
+      <Wrapper>
         Roman Churkin © 2021
       </Wrapper>
     </Container>

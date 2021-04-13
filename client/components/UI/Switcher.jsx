@@ -1,11 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ThemeContext from 'client/context/ThemeContext';
-
 const Input = styled.input`
-  ${({ mode, theme }) => `
+  ${({ theme }) => `
     position: relative;
     width: 0px;
     height: 0px;
@@ -19,13 +17,13 @@ const Input = styled.input`
       left: -22px;
       width: 44px;
       height: 24px;
-      background-color: ${theme[mode].disabledBackground};
+      background-color: ${theme.disabledBackground};
       border-radius: 12px;
-      transition: background-color ease ${theme[mode].defaultTransition};
+      transition: background-color ease ${theme.defaultTransition};
     }
 
     &:checked::before {
-      background-color: ${theme[mode].actionBackground};
+      background-color: ${theme.actionBackground};
     }
 
     &::after {
@@ -35,7 +33,7 @@ const Input = styled.input`
       left: -20px;
       width: 20px;
       height: 20px;
-      background-color: ${theme[mode].actionForeground};
+      background-color: ${theme.actionForeground};
       border-radius: 50%;
       transition: left ease 0.2s;
     }
@@ -47,14 +45,11 @@ const Input = styled.input`
 `;
 
 const Switcher = ({ name, checked, onClick }) => {
-  const { mode } = useContext(ThemeContext);
-
   return (
     <label htmlFor={name} onClick={onClick}>
       <div className="form-checkbox"></div>
       <Input
         type="checkbox"
-        mode={mode}
         onChange={() => {}}
         {...{ name, checked }}
       />

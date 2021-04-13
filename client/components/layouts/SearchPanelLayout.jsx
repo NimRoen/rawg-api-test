@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import throttle from 'lodash/throttle';
 
 import { SORTED_TYPE, SORTING } from 'helpers/constants';
 
-import ThemeContext from 'client/context/ThemeContext';
 import Star from 'client/shared/svg/StarIcon.svg';
 import Calendar from 'client/shared/svg/CalendarIcon.svg';
 
@@ -35,7 +34,7 @@ const Label = styled.span`
 `;
 
 const Button = styled(StyledButton)`
-  ${({ mode, theme }) => `
+  ${({ theme }) => `
     position: relative;
     margin-right: 10px;
 
@@ -46,10 +45,10 @@ const Button = styled(StyledButton)`
       height: 16px;
       top: -6px;
       right: -6px;
-      background-color: ${theme[mode].actionBackground};
+      background-color: ${theme.actionBackground};
       border-radius: 50%;
       opacity: 1;
-      transition: opacity ease ${theme[mode].defaultTransition};
+      transition: opacity ease ${theme.defaultTransition};
     }
 
     &:after {
@@ -61,10 +60,10 @@ const Button = styled(StyledButton)`
       height: 0;
       border-left: 4px solid transparent;
       border-right: 4px solid transparent;
-      border-top: 6px solid ${theme[mode].actionForeground};
+      border-top: 6px solid ${theme.actionForeground};
       opacity: 1;
-      transition: transform ease ${theme[mode].defaultTransition},
-                  opacity ease ${theme[mode].defaultTransition};
+      transition: transform ease ${theme.defaultTransition},
+                  opacity ease ${theme.defaultTransition};
     }
 
     &.descending:after {
@@ -118,7 +117,6 @@ const SearchPanelLayout = ({
   onSearchInput,
   onSearch,
 }) => {
-  const { mode } = useContext(ThemeContext);
   const selected = platforms.reduce((acc, { id }, index) => id === platform ? index : acc, 0);
 
   const toggleSorting = (sortingType) => {
@@ -142,13 +140,11 @@ const SearchPanelLayout = ({
         <Button
           icon={<StarIcon />}
           onClick={() => toggleSorting(SORTING.RATING)}
-          mode={mode}
           className={sorted[SORTING.RATING]}
         />
         <Button
           icon={<CalendarIcon />}
           onClick={() => toggleSorting(SORTING.RELEASED)}
-          mode={mode}
           className={sorted[SORTING.RELEASED]}
         />
       </SortersContainer>

@@ -1,23 +1,23 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import ThemeContext from 'client/context/ThemeContext';
-
 const Container = styled.div`
-  ${({ mode, theme }) => `
+  ${({ theme }) => `
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 350px;
-    background-color: ${theme[mode].actionBackground};
+    color: ${theme.actionForeground};
+    background-color: ${theme.actionBackground};
     border-radius: 16px;
     overflow: hidden;
     cursor: pointer;
-    transition: background-color ease ${theme[mode].defaultTransition};
+    transition: box-shadow ease ${theme.defaultTransition};
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 
     &:hover {
-      box-shadow: 0 0 20px 5px ${theme[mode].actionBackground}80;
+      box-shadow: 0 0 20px 5px ${theme.actionBackground}80;
     }
   `}
 `;
@@ -56,12 +56,11 @@ const RatingContainer = styled.div``;
 
 const GameCardLayout = ({ game }) => {
   const { name, background_image, released, rating } = game;
-  const { mode } = useContext(ThemeContext);
 
   const releasedDate = released ? new Date(released).toLocaleDateString() : '';
 
   return (
-    <Container mode={mode}>
+    <Container>
       <PosterContainer>
         {background_image && <Poster src={background_image} alt={name} />}
       </PosterContainer>

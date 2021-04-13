@@ -1,7 +1,3 @@
-import { css } from 'styled-components';
-
-import { theme } from 'client/styles/theme';
-
 export const CONTENT_WIDTH_MAX = 1920;
 
 const screenSizes = {
@@ -18,7 +14,7 @@ export const mediaSelector = {
   wide: `@media(mix-width: ${screenSizes.desktop}px)`,
 };
 
-export const scrollbar = (mode, width = 4) => {
+export const scrollbar = (theme, width = 4) => {
   return `
     &::-webkit-scrollbar {
       width: ${width}px;
@@ -26,12 +22,12 @@ export const scrollbar = (mode, width = 4) => {
 
     &::-webkit-scrollbar-track {
       margin: 3px;
-      background-color: ${theme[mode].scrollbarBackground};
+      background-color: ${theme.scrollbarBackground};
       border-radius: ${width/2}px;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: ${theme[mode].scrollbarForeground};
+      background-color: ${theme.scrollbarForeground};
       border-radius: ${width/2}px;
     }
   `;
