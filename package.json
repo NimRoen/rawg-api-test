@@ -4,7 +4,9 @@
   "description": "",
   "main": "main.jsx",
   "scripts": {
-    "dev": "next"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "keywords": [],
   "author": "Roman Churkin",

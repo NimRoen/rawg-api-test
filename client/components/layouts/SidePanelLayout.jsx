@@ -6,7 +6,8 @@ import styled from 'styled-components';
 import { routes } from 'helpers/routes';
 
 const Container = styled.aside`
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
   padding: 30px 0;
 `;
 

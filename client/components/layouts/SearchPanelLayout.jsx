@@ -115,6 +115,7 @@ const SearchPanelLayout = ({
   changePlatform,
   sorted,
   onSorting,
+  onSearchInput,
   onSearch,
 }) => {
   const { mode } = useContext(ThemeContext);
@@ -152,10 +153,18 @@ const SearchPanelLayout = ({
         />
       </SortersContainer>
       <SearchContainer>
-        <SearchField
-          placeholder='Поиск...'
-          onChange={throttle(e => onSearch(e.target.value), 200)}
-        />
+        <form onSubmit={e => {
+          e.preventDefault();
+          onSearch();
+        }}>
+          <SearchField
+            placeholder='Поиск...'
+            onChange={throttle(e => {
+              e.preventDefault();
+              onSearchInput(e.target.value);
+            }, 200)}
+          />
+        </form>
       </SearchContainer>
     </Container>
   );
@@ -169,5 +178,6 @@ SearchPanelLayout.propTypes = {
   changePlatform: PropTypes.func,
   sorted: PropTypes.object.isRequired,
   onSorting: PropTypes.func,
+  onSearchInput: PropTypes.func,
   onSearch: PropTypes.func,
 };

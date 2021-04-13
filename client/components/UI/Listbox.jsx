@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -54,6 +54,7 @@ const ContentWrapper = styled.div`
     border: 2px solid ${theme[mode].defaultBorder};
     border-radius: 8px;
     font-size: 1.5rem;
+    background-color: ${theme[mode].defaultBackground};
     overflow: hidden;
   `}
 `;
@@ -97,6 +98,8 @@ const Listbox = ({ elements, selected, onSelect }) => {
 
   if (!hasElements) return null;
 
+  const hide = () => setCollapsed(true);
+
   const ContentList = React.memo(({ elements }) => (
     <ContentWrapper mode={mode}>
       <ContentContainer mode={mode}>
@@ -105,8 +108,10 @@ const Listbox = ({ elements, selected, onSelect }) => {
             key={`listbox-item-${id}`}
             mode={mode}
             onClick={() => {
-              if (selected !== index)
+              if (selected !== index) {
                 onSelect(id);
+                hide();
+              }
             }}
             className={selected === index ? 'selected' : ''}
           >{name}</ListItem>
@@ -119,7 +124,7 @@ const Listbox = ({ elements, selected, onSelect }) => {
     <Popup
       id='listbox-popup'
       content={<ContentList elements={elements} />}
-      hide={() => setCollapsed(true)}
+      hide={hide}
     >
       <Container
         mode={mode}
