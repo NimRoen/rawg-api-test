@@ -3,13 +3,13 @@ import styled from 'styled-components';
 
 import { SORTING, SORTED_TYPE } from 'helpers/constants';
 import SearchPanelLayout from 'layouts/SearchPanelLayout';
+import GameListLayout from 'layouts/GameListLayout';
 
 import { useApi } from 'client/hooks/useApi';
 import { useScrollable } from 'client/hooks/useScrollable';
+import { usePagination } from 'client/hooks/usePagination';
 
 import Page from './Page';
-import GameListLayout from '../layouts/GameListLayout';
-import { usePagination } from '../../hooks/usePagination';
 
 const ScrollableContainer = styled.div`
   height: 100%;

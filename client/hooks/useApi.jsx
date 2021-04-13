@@ -1,4 +1,12 @@
-import { API_PLATFORMS, API_GAMES, SORTED_TYPE, BATCH_GAMES_COUNT } from 'helpers/constants';
+import {
+  API_PLATFORMS,
+  API_GAMES,
+  API_GAME,
+  API_GAME_SCREENSHOTS,
+  SORTED_TYPE,
+  BATCH_GAMES_COUNT
+} from 'helpers/constants';
+import { printf } from 'helpers/string';
 
 import tokens from 'root/tokens.json';
 
@@ -48,8 +56,16 @@ export const useApi = () => {
     };
   };
 
+  const fetchGame = async (slug) =>
+    await fetchResult(`${printf(API_GAME, slug)}?key=${tokens.rawgToken}`);
+
+  const fetchGameScreenshots = async (slug) =>
+    await fetchResult(`${printf(API_GAME_SCREENSHOTS, slug)}?key=${tokens.rawgToken}`);
+
   return {
     fetchPlatforms,
     fetchGames,
+    fetchGame,
+    fetchGameScreenshots,
   };
 };
