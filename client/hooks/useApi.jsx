@@ -56,7 +56,7 @@ export const useApi = () => {
     };
   };
 
-  const fetchGame = async (slug) =>
+  const fetchGameInfo = async (slug) =>
     await fetchResult(`${printf(API_GAME, slug)}?key=${tokens.rawgToken}`);
 
   const fetchGameScreenshots = async (slug) =>
@@ -65,7 +65,7 @@ export const useApi = () => {
   return {
     fetchPlatforms,
     fetchGames,
-    fetchGame,
+    fetchGameInfo,
     fetchGameScreenshots,
   };
 };
