@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { CONTENT_WIDTH_MAX } from 'helpers/style';
+import { mediaSelector, CONTENT_WIDTH_MAX } from 'helpers/style';
 
 import ThemeSwitcher from 'components/form/ThemeSwitcher';
 
 const Container = styled.header`
   width: 100%;
   height: 80px;
+
+  ${mediaSelector.tablet} {
+    padding-left: 80px;
+  }
 `;
 
 const Wrapper = styled.div`

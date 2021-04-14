@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 
-import { scrollbar } from 'helpers/style';
+import { scrollbar, mediaSelector } from 'helpers/style';
 
 import GameCardLayout from './GameCardLayout';
 
@@ -14,6 +14,22 @@ const Container = styled.div`
     flex-grow: 1;
 
     ${scrollbar(theme)}
+
+    ${mediaSelector.desktop} {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    ${mediaSelector.wideTablet} {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    ${mediaSelector.wideMobile} {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    ${mediaSelector.mobile} {
+      grid-template-columns: 1fr;
+    }
   `}
 `;
 

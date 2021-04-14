@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import throttle from 'lodash/throttle';
 
 import { SORTED_TYPE, SORTING } from 'helpers/constants';
+import { mediaSelector } from 'helpers/style';
 
 import Star from 'client/shared/svg/StarIcon.svg';
 import Calendar from 'client/shared/svg/CalendarIcon.svg';
@@ -16,6 +17,17 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   height: 50px;
+
+  ${mediaSelector.tablet} {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    height: 80px;
+  }
+`;
+
+const RightContainer = styled.div`
+  display: flex;
 `;
 
 const FiltersContainer = styled.div`
@@ -128,26 +140,28 @@ const SearchPanelLayout = ({
 
   return (
     <Container>
-      <FiltersContainer>
-        <Label>{'Платформа:'}</Label>
-        <Listbox
-          elements={platforms}
-          selected={selected}
-          onSelect={changePlatform}
-        />
-      </FiltersContainer>
-      <SortersContainer>
-        <Button
-          icon={<StarIcon />}
-          onClick={() => toggleSorting(SORTING.RATING)}
-          className={sorted[SORTING.RATING]}
-        />
-        <Button
-          icon={<CalendarIcon />}
-          onClick={() => toggleSorting(SORTING.RELEASED)}
-          className={sorted[SORTING.RELEASED]}
-        />
-      </SortersContainer>
+      <RightContainer>
+        <FiltersContainer>
+          <Label>{'Платформа:'}</Label>
+          <Listbox
+            elements={platforms}
+            selected={selected}
+            onSelect={changePlatform}
+          />
+        </FiltersContainer>
+        <SortersContainer>
+          <Button
+            icon={<StarIcon />}
+            onClick={() => toggleSorting(SORTING.RATING)}
+            className={sorted[SORTING.RATING]}
+          />
+          <Button
+            icon={<CalendarIcon />}
+            onClick={() => toggleSorting(SORTING.RELEASED)}
+            className={sorted[SORTING.RELEASED]}
+          />
+        </SortersContainer>
+      </RightContainer>
       <SearchContainer>
         <form onSubmit={e => {
           e.preventDefault();
