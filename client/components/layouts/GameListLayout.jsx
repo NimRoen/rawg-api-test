@@ -30,7 +30,7 @@ const Anchor = styled(({ anchor, children, ...props }) => (
     position: absolute;
     top: -222px;
     width: 100%;
-    height: 302px;
+    height: 332px;
     margin: 0 auto;
     z-index: -1;
   }

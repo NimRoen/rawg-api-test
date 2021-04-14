@@ -5,8 +5,7 @@
   "main": "main.jsx",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+    "start": "next build && next start"
   },
   "keywords": [],
   "author": "Roman Churkin",
@@ -17,7 +16,7 @@
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-slider": "^1.1.4",
+    "react-responsive-carousel": "^3.2.18",
     "styled-components": "^5.2.3"
   },
   "devDependencies": {

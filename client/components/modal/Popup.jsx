@@ -2,8 +2,9 @@ import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { useClickOutside } from 'client/hooks/useClickOutside';
+
 import ModalPortal from 'components/modal/ModalPortal';
-import { useClickOutside } from '../../hooks/useClickOutside';
 
 const Container = styled.div`
   ${({ position: { top, left } }) => `
